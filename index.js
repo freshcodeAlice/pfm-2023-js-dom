@@ -22,10 +22,15 @@ Model
 
 */
 
-document.querySelector('будь-який валідний css-селектор, включно з комбінаторами та псевдокласами ')
+const articlesHTMLCollection = document.getElementsByTagName('article');
 
-const secondPars = document.querySelectorAll('section article:nth-child(2n)');
+const articlesNodeList = document.querySelectorAll('article');
 
-for (const elem of secondPars) {
-    elem.style.color = 'red';
-}
+/*
+HTMLCollection - "жива" колекція.
+При видаленні (або створенні нових елементів) формує актуальний список посилань на елементи (при видаленні буде зі списку видаляти їх, при створенні додавати)
+
+NodeList - статична колекція, один раз сформований список не зміниться, якщо елементи будуть видалені або додані
+
+Якщо потрібно оновити список елементів - можна перевикликати querySelectorAll і перестворити NodeList заново
+*/
