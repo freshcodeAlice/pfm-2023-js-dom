@@ -11,29 +11,6 @@ Model
 
 */
 
-console.log(1);
-
-const p = document.getElementById('super-par');
-console.log(p);
-p.style="color: green";
-
-
-const paragraphs = document.getElementsByTagName('p');
-console.log(paragraphs)  /// HTMLCollection - псевдо-масив (ітерована колекція, яка не є екземпляром Array)
-
-for (const element of paragraphs) {
-    element.style = 'color: violet';
-}
-
-
-const array = [...paragraphs]; // перетворюємо її на звичайний масив, що дає нам можливість використовувати методи масива
-
-
-
-const redClassP = document.getElementsByClassName('red-text');
-
-console.log(redClassP);
-
 /*
 Два важливих принципи:
 
@@ -45,12 +22,10 @@ console.log(redClassP);
 
 */
 
+document.querySelector('будь-який валідний css-селектор, включно з комбінаторами та псевдокласами ')
 
-/* Створити на сторінці article і всередині нього 5 p з текстом.
-1. Динамічно пофарбувати текст у червоний колір
-2. Видалити останній параграф
+const secondPars = document.querySelectorAll('section article:nth-child(2n)');
 
-*/
-
-
-paragraphs[paragraphs.length - 1].remove();
+for (const elem of secondPars) {
+    elem.style.color = 'red';
+}
