@@ -36,12 +36,18 @@ for (const btn of nlistBtn) {
 
 function clicker(event){   /* Функція eventHandler - обробник події  */
   // console.log(event.target.textContent);
-  console.log(event);
-  event.target.remove()
+    const text = event.target.textContent;
+    event.target.style.backgroundColor = text;
 }
 
 /*
 Підписка на подію повідомляє браузеру, що ми хочемо відреагувати на щось конкретне, якщо і коли воно станеться
 Браузер викликає обробник події та передає йому у аргументи об'єкт події, що сталася
+
+*/
+
+/* Таска:
+Створити три кнопки. На першій написано "red", на другій "green",  на третій "blue".
+За натиснення на кнопку фоновий колір цієї кнопки має стати таким, як на кнопці написано
 
 */
