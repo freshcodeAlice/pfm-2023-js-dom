@@ -25,13 +25,19 @@
 
 */
 
-const button = document.querySelector('button');
+const nlistBtn = document.querySelectorAll('button');
 
-button.addEventListener('click', clicker);
+
+for (const btn of nlistBtn) {
+    btn.addEventListener('click', clicker);
+}
+
 
 
 function clicker(event){   /* Функція eventHandler - обробник події  */
-   console.log(event);
+  // console.log(event.target.textContent);
+  console.log(event);
+  event.target.remove()
 }
 
 /*
