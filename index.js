@@ -22,8 +22,6 @@ Model
 
 */
 
-const elem = document.createElement('button');
-elem.textContent = 'Click me please'
 
 /*
 Створення елементів:
@@ -34,5 +32,11 @@ elem.textContent = 'Click me please'
 
 */
 
-const section = document.querySelector('section');
-section.append(elem)
+const element = document.createElement('p');  // створюється HTMLParagraphElement
+
+element.textContent = 'PARAGRAPH element';
+element.style.color = 'violet';
+
+const section = document.querySelector('section'); // витягти посилання існуючого на сторінці елементу
+
+section.append(element);
