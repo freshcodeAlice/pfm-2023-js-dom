@@ -28,12 +28,18 @@
 const btn = document.querySelector('button');
 
 const handler = function(event) {
-    console.log(event.target);
-    event.target.removeEventListener('click', handler); /// знімаємо з елемента обробку події
+    console.log(event);
+}
+const secondHandler = function(event) {
+    console.log('THIS IS MY SECOND HANDLER');
+    event.target.removeEventListener('click', handler);
 }
 
 btn.addEventListener('click', handler);
+btn.addEventListener('click', secondHandler);
 
+//btn.addEventListener('mouseover', handler);
+btn.addEventListener('contextmenu', handler);
 
 
 
