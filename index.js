@@ -30,17 +30,12 @@ const button = document.querySelector('button');
 button.addEventListener('click', clicker);
 
 
-function clicker(){
-    alert('hello, user');
+function clicker(event){   /* Функція eventHandler - обробник події  */
+   console.log(event);
 }
 
 /*
-У відповідь на клік мишею на параграф тексту, вивести в консоль "ха-ха, попався! на текст клацати не можна"
+Підписка на подію повідомляє браузеру, що ми хочемо відреагувати на щось конкретне, якщо і коли воно станеться
+Браузер викликає обробник події та передає йому у аргументи об'єкт події, що сталася
 
 */
-
-const p = document.querySelector('p');
-
-p.addEventListener('click', function() {
-    console.log("ха-ха, попався! на текст клацати не можна")
-})
