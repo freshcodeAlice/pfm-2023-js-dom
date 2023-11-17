@@ -25,29 +25,22 @@
 
 */
 
-const btn = document.querySelector('button');
-
-const handler = function(event) {
-    console.log(event);
-}
-const secondHandler = function(event) {
-    console.log('THIS IS MY SECOND HANDLER');
-    event.target.removeEventListener('click', handler);
-}
-
-btn.addEventListener('click', handler);
-btn.addEventListener('click', secondHandler);
-
-//btn.addEventListener('mouseover', handler);
-btn.addEventListener('contextmenu', handler);
-
-
 
 /*
-Підписка на подію повідомляє браузеру, що ми хочемо відреагувати на щось конкретне, якщо і коли воно станеться
-Браузер викликає обробник події та передає йому у аргументи об'єкт події, що сталася
+Зробити п'ять кнопок, які за натиснення виводять текст, що на них написаний, в консоль і знімають з себе обробку події натиснення
 
-
-Для відписки від події мені потрібно повідомити браузеру, що ця подія мені не потрібна.
 
 */
+
+
+const btns = document.querySelectorAll('button');
+
+for (const btn of btns) {
+    btn.addEventListener('click', clickHandler)    
+}
+
+function clickHandler(event) {
+ //   const {target: btn} = event;
+    console.log(event.target.textContent);
+    event.target.removeEventListener('click', clickHandler)
+}
