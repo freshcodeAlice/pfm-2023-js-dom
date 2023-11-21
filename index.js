@@ -73,18 +73,6 @@ class Game {
     }
 }
 
-/*
-section.addEventListener('click', handler);
-const game = new Game(article);
-
-function handler(event) {
-    if(event.target === event.currentTarget) {
-        game.decrement(); 
-    } else {
-        game.increment();
-    }
-}
-*/
 
 
 
@@ -103,15 +91,50 @@ Y: 25
  За натиснення на батьківський перемістити div за місцем кліка
 
 */
+const game = new Game(article);
 
 section.addEventListener('click', function(event){
-    if (event.target === event.currentTarget) {
-        const div = event.target.children.box;
-        const x = event.clientX - (div.offsetWidth / 2);
-        const y = event.clientY - (div.offsetHeight / 2);
+
+
+    if(event.target === event.currentTarget) {
+        game.decrement(); 
+    } else {
+        game.increment();
+    }
+
+        const div = event.currentTarget.children.box;
+        const x = getRandomCoordinates(0, event.currentTarget.offsetWidth - (div.offsetWidth / 2));
+        const y = getRandomCoordinates(0, event.currentTarget.offsetHeight - (div.offsetHeight / 2));
+
+
         div.style.top = `${y}px`;
         div.style.left = `${x}px`;
-    }
     
    
 });
+
+
+
+
+/*
+section.addEventListener('click', handler);
+const game = new Game(article);
+
+function handler(event) {
+    if(event.target === event.currentTarget) {
+        game.decrement(); 
+    } else {
+        game.increment();
+    }
+}
+*/
+
+
+function getRandomCoordinates(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+/*
+Елемент рандомно переміщується в межах батьківського елемента, користувач має на нього натиснути, елемент знову переміщується
+
+*/
