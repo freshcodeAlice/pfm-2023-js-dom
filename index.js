@@ -42,7 +42,6 @@ const article = document.querySelector('article');
 
 
 
-
 class Game {
     constructor(scoreElement) {
        this.count = 0;
@@ -97,9 +96,22 @@ function handler(event) {
 X: 64
 Y: 25
 
+*/
+
+
+/*
+ За натиснення на батьківський перемістити div за місцем кліка
 
 */
 
 section.addEventListener('click', function(event){
-    article.textContent = `X: ${event.clientX}, Y: ${event.clientY}`
-})
+    if (event.target === event.currentTarget) {
+        const div = event.target.children.box;
+        const x = event.clientX - (div.offsetWidth / 2);
+        const y = event.clientY - (div.offsetHeight / 2);
+        div.style.top = `${y}px`;
+        div.style.left = `${x}px`;
+    }
+    
+   
+});
