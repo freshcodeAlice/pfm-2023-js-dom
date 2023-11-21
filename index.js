@@ -74,7 +74,7 @@ class Game {
     }
 }
 
-
+/*
 section.addEventListener('click', handler);
 const game = new Game(article);
 
@@ -85,3 +85,21 @@ function handler(event) {
         game.increment();
     }
 }
+*/
+
+
+
+
+
+/*
+За натиснення в батьківському елементі в article замість лічильника вивести координати натиснення
+
+X: 64
+Y: 25
+
+
+*/
+
+section.addEventListener('click', function(event){
+    article.textContent = `X: ${event.clientX}, Y: ${event.clientY}`
+})
