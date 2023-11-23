@@ -8,8 +8,22 @@ const form = document.querySelector('form');
 form.addEventListener('submit', function(event){
     // потрібно зупинити поведінку за замовчуванням!
     event.preventDefault(); // виклик методу зупиняє поведінку за-замовчуванням
-    const form = event.target;
-    const inputUsername = form.username.value;
-    const inputPass = form.pass.value;
-    console.log({inputUsername, inputPass})
+    const {firstName, lastName, email, pass, birthday, agreement} = event.target;
+    const userObj = {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email.value,
+        password: pass.value,
+        birthday: birthday.value,
+        agree: agreement.checked
+    }
+    console.log(userObj)
 })
+
+
+/*
+1. Додати мінімум стилів, прописати пояснення до кожного інпута, що це інформація
+
+2. За відправки форми вивести в консоль об'єкт зі всією введеною інформацією користувача
+
+*/

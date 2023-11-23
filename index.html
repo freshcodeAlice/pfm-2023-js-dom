@@ -14,9 +14,29 @@
 
 <body>
     <form>
-        <input type="text" class="text-input" name="username"/>
-        <input type="password" class="password-input"
-        name="pass"/>
+        <label>
+            Type your name
+        <input type="text" name="firstName"/>
+        </label>
+        <label>
+            Type your lastname
+        <input type="text" name="lastName" />
+        </label>
+        <label>
+            Type your email
+        <input type="email" name="email" />
+        </label>
+        <label>
+            Password
+        <input type="password" name="pass"/>
+    </label>
+    <label>Birthday
+        <input type="date" name="birthday" />
+    </label>
+        <label>
+        <input type="checkbox" name="agreement">
+        Agree with rules
+        </label>
         <button type="submit">Click me</button>
     </form>
 </body>

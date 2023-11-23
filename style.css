@@ -1,0 +1,19 @@
+body {
+  display: flex;
+  height: 98vh;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  width: 20vw;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 3%;
+}
+
+form * {
+  margin: 2% 0;
+}
