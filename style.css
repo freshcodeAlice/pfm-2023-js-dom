@@ -1,0 +1,11 @@
+.red-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: red;
+}
+
+.green-square {
+    border-radius: 0;
+    background-color: green;
+}

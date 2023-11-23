@@ -11,14 +11,15 @@ const body = document.body;
 
 btn.addEventListener('click', function() {
     const redCircle = document.createElement('div');
-    redCircle.style.backgroundColor = 'red';
-    redCircle.style.borderRadius = '50%';
-    redCircle.style.width = '80px';
-    redCircle.style.height = '80px';
+    redCircle.className = 'red-circle';
+
 
     redCircle.addEventListener('click', function (event) {
-        event.target.style.backgroundColor = 'green';
-        event.target.style.borderRadius = '0';
+//        event.target.className = 'green-square';
+
+    const cl = event.target.classList;
+    cl.toggle('green-square');
+    console.log(event.target.classList)
     })
 
     body.append(redCircle);
