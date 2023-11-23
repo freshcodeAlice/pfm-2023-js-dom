@@ -1,49 +1,18 @@
-.menu-container {
-    display: inline-block;
-    cursor: pointer;
-    position: fixed;
-    top: 3%;
-    right: 3%;
-    z-index: 3;
-  }
-  
-.bar {
-    width: 35px;
-    height: 5px;
-    background-color: #333;
-    margin: 6px 0;
-    transition: 0.4s;
-  }
-  
-  .change .bar1 {
-    transform: translate(0, 11px) rotate(-45deg);
-  }
-  
-  .change .bar2 {opacity: 0;}
-  
-  .change .bar3 {
-    transform: translate(0, -11px) rotate(45deg);
-  }
+.red-text {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
 
+.green-color {
+  background-color: violet;
+  color: green;
+  font-size: 1.5em;
+}
 
-  .side-menu {
-     width: 20vw; 
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    padding: 5%;
-    background-color: rgba(0, 0, 0, 0.64);
-    color: white;
-    font-size: 2.3em;
-    display: none;
-    z-index: 2;
-  }
-
-  .show {
-    display: block;
-  }
-
-  .side-menu li {
-    margin: 6% 0 ;
-  }
+.blue-circle {
+  background-color: blue;
+  border-radius: 50%;
+  border: none;
+}
