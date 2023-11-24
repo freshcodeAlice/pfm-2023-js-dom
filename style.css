@@ -1,45 +1,4 @@
-body {
-  display: flex;
-  height: 98vh;
-  justify-content: center;
-  align-items: center;
-}
-
-form {
-  width: 20vw;
-  min-width: 200px;
-  display: flex;
-  flex-direction: column;
+form  {
   border: 1px solid black;
-  padding: 3%;
-}
-
-form * {
-  margin: 2% 0;
-}
-
-.error-text {
-  color: red;
-  font-size: 1em;
-  font-weight: bold;
-}
-
-.valid {
-  background-color: lightgreen;
-}
-
-.invalid {
-  background-color: lightcoral;
-}
-
-.input-wrapper{
-  position: relative;
-}
-
-.pass-icon {
-  position: absolute;
-  top: 0;
-  left: 80%;
-  cursor: pointer;
-  z-index: 2;
+  padding: 5%;
 }

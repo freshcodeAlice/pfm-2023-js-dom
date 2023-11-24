@@ -1,71 +1,55 @@
-const form = document.querySelector('form');
-const inputFirstName = document.querySelector('input[name="firstName"]');
-
-
-inputFirstName.addEventListener('change', function({target}) {
-  
-    if(validateName(target.value)){
-        target.classList.remove('invalid');
-       target.classList.add('valid')
-    } else {
-        target.classList.add('invalid')
-    }
-})
-
-
-function validateName(value) {
-    return !(value.includes('@') || value.includes('!')) 
-}
-
 /*
-<form> за замовчуванням має специфічну поведінку - вона перезавантажує сторінку, намагаючись самостійно відправити дані туди, куди вказує атрибут action
+TodoList - Список справ
+
++За введення в форму та натиснення на кнопку під формою має з'явитись новий пункт списку
+
+ТЗ:
++1. Не створювати новий пункт списку, якщо в інпуті пусто
++2. Кожна лі-шка має кнопку самоліквідації. За натиснення цей пункт списку видаляється.
+
++3. Всі пункти списку мають зберігатись в певній колекції.
+
 
 */
 
-form.addEventListener('submit', function(event){
-    // потрібно зупинити поведінку за замовчуванням!
-    event.preventDefault(); // виклик методу зупиняє поведінку за-замовчуванням
-    const form = event.target;
-    if (validateData(form.pass.value, form.passRepeat.value)) {
-        submitDataToServer(form);
-    } else {
-        createErrorMessage(form)
-    }
-})
 
-function validateData(inputValue1, inputValue2) {
-    return inputValue1 === inputValue2
+const form = document.querySelector('.todo-form');
+const list = document.querySelector('.todo-list');
+
+let todoArray = [];
+let counter = 0;
+
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const {todo: {value: todoText}} = event.target;
+    if (todoText){
+        todoArray.push({
+            text: todoText,
+            id: counter++
+        });
+    }
+    updateView(todoArray);
+});
+
+
+
+function updateView(todoArray) {
+    const liArray = todoArray.map(todoObj => {
+        const li = document.createElement('li');
+        li.append(todoObj.text);
+        li.dataset.id = todoObj.id;
+        const button = document.createElement('button');
+        button.textContent = 'X';
+        button.addEventListener('click', deleteButtonHandler)
+        li.append(button);
+        return li;
+    });
+    list.replaceChildren(...liArray);
 }
 
 
-function submitDataToServer({firstName, lastName, email, pass, passRepeat, birthday, agreement}){
-    const userObj = {
-        firstName: firstName.value,
-        lastName: lastName.value,
-        email: email.value,
-        password: pass.value,
-        birthday: birthday.value,
-        agree: agreement.checked
-    }
-       console.log(userObj); // відправляємо дані на сервер
+function deleteButtonHandler(event) {
+  const parentLi = event.target.parentElement;
+  todoArray = todoArray.filter(elem => elem.id !== Number(parentLi.dataset.id));
+  updateView(todoArray);
 }
-
-
-function createErrorMessage(form) {
-        const errorMessage = document.createElement('p');
-        errorMessage.classList.add('error-text');
-        errorMessage.textContent = 'Password must be the same';
-        form.append(errorMessage);
-}
-
-const icon = document.querySelector('.pass-icon');
-const passInput = document.querySelector('input[name="pass"]');
-
-icon.addEventListener('click', function() {
-    if (passInput.type === "password") {
-        passInput.type = "text";
-    } else {
-        passInput.type = "password";
-    }
-
-})

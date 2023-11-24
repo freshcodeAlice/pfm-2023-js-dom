@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./reset.css">
+<!--    <link rel="stylesheet" href="./reset.css"> -->
     <link rel="stylesheet" href="style.css">
     <script src="./Slider.js" defer></script>
     <script src="./index.js" defer></script>
@@ -13,40 +13,13 @@
 </head>
 
 <body>
-    <form>
-        <label>
-            Type your name
-        <input type="text" name="firstName"/>
-        </label>
-        <label>
-            Type your lastname
-        <input type="text" name="lastName" />
-        </label>
-        <label>
-            Type your email
-        <input type="email" name="email" />
-        </label>
-        <label>
-            Figure password
-            <div class="input-wrapper">
-        <input type="password" name="pass" />
-        <span class="pass-icon">&</span>
-    </div>
-        </label>
-
-        <label>
-           Repeat password
-        <input type="password" name="passRepeat"/>
-    </label>
-    <label>Birthday
-        <input type="date" name="birthday" />
-    </label>
-        <label>
-        <input type="checkbox" name="agreement">
-        Agree with rules
-        </label>
-        <button type="submit">Click me</button>
-    </form>
+   <form class="todo-form">
+    <input type="text" name="todo"/>
+    <button>Create</button>    
+   </form>
+   <section class="list-wrapper">
+    <ul class="todo-list"></ul>
+   </section>
 </body>
 
 </html>
