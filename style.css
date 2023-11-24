@@ -31,3 +31,15 @@ form * {
 .invalid {
   background-color: lightcoral;
 }
+
+.input-wrapper{
+  position: relative;
+}
+
+.pass-icon {
+  position: absolute;
+  top: 0;
+  left: 80%;
+  cursor: pointer;
+  z-index: 2;
+}

@@ -57,3 +57,15 @@ function createErrorMessage(form) {
         errorMessage.textContent = 'Password must be the same';
         form.append(errorMessage);
 }
+
+const icon = document.querySelector('.pass-icon');
+const passInput = document.querySelector('input[name="pass"]');
+
+icon.addEventListener('click', function() {
+    if (passInput.type === "password") {
+        passInput.type = "text";
+    } else {
+        passInput.type = "password";
+    }
+
+})
