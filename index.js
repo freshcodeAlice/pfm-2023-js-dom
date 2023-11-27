@@ -39,10 +39,36 @@ setTimeout(fn, time) - приймає посилання на функцію і 
 
 function tick() {
     console.log('tick');
+    //// важкі обчислення, які займають час
 }
 
-const res = setTimeout(tick, 5000);
+//const res = setTimeout(tick, 5000);
 // res - ідентифікатор таймаута, повертається одразу
 
-clearTimeout(res); // очистка timeout, тобто відміна виконання задачі, відкладеної у часі
+//clearTimeout(res); // очистка timeout, тобто відміна виконання задачі, відкладеної у часі
 
+
+//const intervalId = setInterval(tick, 3000);
+
+//clearInterval(intervalId); // очищує інтервал
+
+/*
+interval кожні time секунд запускає функцію на виконання. Виконана вона буде тільки після того, як в стеку буде пусто і попередній виклик функцій буде оброблений
+
+*/
+
+// Другий спосіб (аналог інтервалів - рекурсивний setTimeout)
+
+let i = 0;
+
+const id = setTimeout(function tack() {
+    tick();
+    i++;
+   const recId = setTimeout(tack, 3000);
+   if(i > 10) {
+    clearTimeout(recId);
+   }
+}, 3000);
+
+
+// Рекурсивний таймаут не буде враховувати час виконання функції у проміжок часу очікування
