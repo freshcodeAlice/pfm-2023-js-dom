@@ -1,68 +1,52 @@
-/*
-
-Таска:
-при відкритті сторінки
-відобразити карточку кожного кота
-
-Порада: створити спочатку верстку 1 картки, прописати стилі, потім закоментувати верстку і створювати всі ті самі елементи динамічно
-
- <article class="card">
-      <img src="" class="img"/>
-      <h2 class="name">catname</h2>
-      <p class="age">Age: 5</p>
-    </article> 
-
- */
-
-    const root = document.querySelector('#root');
-
-const htmlCardArray = data.map((catObj) => {
-    // const img = document.createElement('img');
-    // img.setAttribute('src', catObj.userPic);
-    // img.classList.add('img');
-    const img = createElement('img', ['img']);
-    img.setAttribute('src', catObj.userPic);
-
-    // const h2 = document.createElement('h2');
-    // h2.append(catObj.username);
-    // h2.classList.add('name');
-    const h2 = createElement('p', ['name'], [catObj.username]);
-
-    // const p = document.createElement('p');
-    // p.append(catObj.age);
-    // p.classList.add('age');
-    const p = createElement('p', ['age'], [catObj.age])
+/* JSON - JavaScript Object Notation */
 
 
-    // const article = document.createElement('article');
-    // article.classList.add('card');
-    // article.append(img, h2, p);
-
-    // return article;
-
-    return createElement('article', ['card'], [img, h2, p]);
-})
-
-console.log(htmlCardArray)
-
-root.append(...htmlCardArray);
-
-
-function createElement(type, classNames = [], children = []) {
-    const elem = document.createElement(type);
-    elem.classList.add(...classNames);
-    elem.append(...children);
-    return elem;
+const obj = {
+    firstName: 'John',
+    lastName: 'Lennon',
+    age: 25,
+    email: 'john@beatles.com',
+    isMale: true,
+    isAgreeWithRules: undefined,
+    sayHello: function() {},
+    [Symbol()]: 'symbol value',
+    phones: [4392874928734, 987497324],
+    friends: {
+        name: 'Jane',
+        lastName: 'Doe'
+    },
+    isSelected: null
 }
 
-/*
-Якщо б нам потрібно було в цій функції встановлювати елементу не тільки класи, але й інші атрибути
-(properties - props)
+console.log(obj);
 
-{
-    src: '',
-    classNames: [],
-    checked: true,
-} - по цьому об'єкту можна пройтись циклом і встановити потрібні атрибути елементу
+/*
+JSON - формат, який дозволяє перетворювати js-об'єкти у текстові дані
+
+Процес перетворення об'єкту в текст (в JSON) називається серіалізація
+
+У форматі JSON доступні:
+- об'єкти
+- масиви
+- змінні:
+    - string (в подвійних лапках)
+    - number
+    - boolean
+    - null
+
+У форматі JSON не має бути висячої коми
 
 */
+
+const str = JSON.stringify(obj); // серіалізація
+
+const invalidStr = "firstName: 'John'";
+
+
+/// Зворотній процес: десеріалізація
+
+JSON.parse(str); // отримуємо валідний JSON, перетворюємо його в js-об'єкт
+
+//JSON.parse(invalidStr); // SyntaxError
+
+console.log(str);
