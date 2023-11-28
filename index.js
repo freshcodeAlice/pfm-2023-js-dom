@@ -1,47 +1,3 @@
-setTimeout(() => {
-    console.log('DONE AFTER ALL SYNC WORK');
-    anotherAfterWork();
-}, 0)
-
-
-function syn1(fn, fn1) {
-    console.log('first sync work');
-    // syn2()
-    fn(fn1);
-}
-
-function syn2(fn1) {
-    console.log('second sync work');
-    // syn3()
-    fn1();
-}
-
-function syn3() {
-    console.log('third sync work');
-}
-
-syn1(syn2, syn3);
-
-
-
-function anotherAfterWork() {
-    console.log('after async');
-}
-
-
-setTimeout(function() {   /* micro-callback-hell */
-    console.log(1);
-    setTimeout(()=> {
-        console.log(2);
-        setTimeout(()=>{
-            console.log(3);
-            setTimeout(()=>{
-                console.log(4);
-            },0)
-        },0)
-    },0)
-},0)
-
 /*
 Promise - особливий об'єкт, який використовується для асинхронної роботи
 
@@ -52,4 +8,25 @@ Promise - особливий об'єкт, який використовуєть�
 або rejected (відхилений, помилка)
 
 Проміс - одноразовий, він змінює стан тільки один раз
+*/
+
+const res = fetch('https://randomuser.me/api/'); // синхронно створюється об'єкт Promise
+
+// console.log(res);
+
+res.then(function(){
+    console.log('my request was good')
+}, function() {
+    console.log('my request was bad')
+})
+
+/*
+setTimeout, setInterval, addEventListener - macrotasks
+
+.then(callback) - microtasks
+
+Коли в стеку задач пусто, EventLoop перевіряє дві черги.
+Першими виконуоє (одну за одною) ВСІ micro-tasks, тільки після цього - іде виконуватись одна макротаска.
+Після її виконання EventLoop знову перевіряє чергу microtasks, виконує їх (якщо вони є) всі, після цього - наступну macrotask
+
 */
