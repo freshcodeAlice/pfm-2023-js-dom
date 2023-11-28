@@ -89,6 +89,9 @@ Promise handling (then callback) - microtask. Вони виконуються (�
 
 .catch() - приймає 1 коллбек, який виконається, якщо проміс було відхилено
 
+
+.finally() - приймає 1 коллбек, який виконається в кінці всього ланцюжка, незважаючи на результат роботи (тобто в обох випадках статусів проміса)
+
 */
 
 
@@ -146,36 +149,16 @@ promise
 promise
 .then(function(dataSuc){
     console.log(dataSuc);
-    throw new Error('OOOPS');
+//    throw new Error('OOOPS');
 //    return 5;
 })
 .then(function(secValue){
     console.log(secValue);
 
 })
-.then(function(value){
-    console.log('LAST THEN');
-   
-})
 .catch(function(error){
     console.log('promise error', error);
 })
-
-/*
-Створити проміс, який успішно зарезолвиться. Обробити його і внаслідок обробки викинути помилку. Перехопити помилку методом catch і вивести в консоль
-
-*/
-
-
-const secPromise = new Promise(function(res, rej){
-    res()
-})
-
-secPromise
-.then(function(){
-    /// робимо якусь роботу, і тут помилка
-    throw new Error()
-})
-.catch((error)=>{
-    console.log(error)
+.finally(()=>{
+    console.log('FINALLY HERE')
 })
