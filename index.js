@@ -72,3 +72,19 @@ cons();
  
 
 */
+
+const btn = document.querySelector('button');
+
+/*
+btn.addEventListener('click', function tick() {
+    console.log('клац');
+    setInterval(()=>{
+        console.log('клац');
+    }, 4000)
+})
+*/
+
+btn.addEventListener('click', function tick() {
+    console.log('клац');
+    setTimeout(tick, 4000);
+})
