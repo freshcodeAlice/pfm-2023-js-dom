@@ -95,70 +95,23 @@ Promise handling (then callback) - microtask. Вони виконуються (�
 */
 
 
-const promise = new Promise(function(res, rej){
-   res('its ok')
-});
+const promise = fetch('https://randomuser.me/api/');
 
-/* Два коллбеки then
-promise
-.then(function(dataSuc){
-    console.log(dataSuc);
-}, function(){
-    console.log('promise rejected');
-})
-
-*/
-
-/*
-promise
-.then(function(dataSuc){
-    console.log(dataSuc);
-    return 5;
-}, function(){
-    console.log('promise rejected');
-})
-.then(function(secValue){
-    console.log(secValue);
-   throw new Error('OOOPS');
-}, function(){
-    console.log('promise rejected');
-})
-.then(function(value){
-    console.log(value);
-   
-}, function(error){
-    console.log('promise error', error);
-})
-
-*/
-
-
-// then + catch
-
-/*
-promise
-.then(function(dataSuc){
-    console.log(dataSuc);
-})
-.catch(function(){
-    console.log('promise rejected');
-})
-*/
-
+/// тут проміс ще пендиться
 
 promise
-.then(function(dataSuc){
-    console.log(dataSuc);
-//    throw new Error('OOOPS');
-//    return 5;
+.then((response) => {
+    console.log(response); // спеціальний об'єкт Response, який містить відповідь на мій запит
+    /*
+    const promiseSecond = response.json();  // ось ця робота по перетворенню ReadableStream в дані вимагає часу!
+    return promiseSecond // повернеться 1 новий проміс, який буде містити результат асинхронного читання ReadableStream
+    */
+   return response.json();
 })
-.then(function(secValue){
-    console.log(secValue);
-
+.then((json)=>{
+    console.log(json);
+    /// дані з сервера тут вже доступні, можемо робити з ними все, що треба
 })
-.catch(function(error){
-    console.log('promise error', error);
-})
-.finally(()=>{
-    console.log('FINALLY HERE')
+.catch((error) => {
+    console.log(error);
 })
