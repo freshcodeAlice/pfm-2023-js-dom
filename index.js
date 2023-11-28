@@ -70,28 +70,6 @@ myfirstPromise.then(function(data) {
 
 */
 
-setTimeout(()=>{
-    console.log('timer!')
-},0);
-
-setTimeout(()=>{
-    console.log('second timer')
-},0);
-
-const promise = new Promise(function(res, rej){
-    res('promise ok')
-});
-
-promise.then(function(promiseValue){
-    console.log(promiseValue);
-    return 'second promise'; // then -> new Promise()
-}).then(function(data){
-    console.log(data);
-    return 'third promise'; // then -> new Promise()
-}).then(function(anotherData){
-    console.log(anotherData);
-})
-
 /*
 Коли інтерпретатор коду зустрічає створення проміса, він його створює зі статусом pending і намагається виконати функцію-executor
 
@@ -99,3 +77,105 @@ promise.then(function(promiseValue){
 
 Promise handling (then callback) - microtask. Вони виконуються (всі!) першими, тільки після того - одна макро-таска
 */
+
+
+/*
+Методи проміса:
+
+.then() - приймає два коллбека, перший з яких - resolve, другий - reject
+Варіант:
+    .then приймає 1 коллбек, і він стає resolve-коллбеком
+    В такому випадку відхилений проміс згенерує помилку
+
+.catch() - приймає 1 коллбек, який виконається, якщо проміс було відхилено
+
+*/
+
+
+const promise = new Promise(function(res, rej){
+   res('its ok')
+});
+
+/* Два коллбеки then
+promise
+.then(function(dataSuc){
+    console.log(dataSuc);
+}, function(){
+    console.log('promise rejected');
+})
+
+*/
+
+/*
+promise
+.then(function(dataSuc){
+    console.log(dataSuc);
+    return 5;
+}, function(){
+    console.log('promise rejected');
+})
+.then(function(secValue){
+    console.log(secValue);
+   throw new Error('OOOPS');
+}, function(){
+    console.log('promise rejected');
+})
+.then(function(value){
+    console.log(value);
+   
+}, function(error){
+    console.log('promise error', error);
+})
+
+*/
+
+
+// then + catch
+
+/*
+promise
+.then(function(dataSuc){
+    console.log(dataSuc);
+})
+.catch(function(){
+    console.log('promise rejected');
+})
+*/
+
+
+promise
+.then(function(dataSuc){
+    console.log(dataSuc);
+    throw new Error('OOOPS');
+//    return 5;
+})
+.then(function(secValue){
+    console.log(secValue);
+
+})
+.then(function(value){
+    console.log('LAST THEN');
+   
+})
+.catch(function(error){
+    console.log('promise error', error);
+})
+
+/*
+Створити проміс, який успішно зарезолвиться. Обробити його і внаслідок обробки викинути помилку. Перехопити помилку методом catch і вивести в консоль
+
+*/
+
+
+const secPromise = new Promise(function(res, rej){
+    res()
+})
+
+secPromise
+.then(function(){
+    /// робимо якусь роботу, і тут помилка
+    throw new Error()
+})
+.catch((error)=>{
+    console.log(error)
+})
