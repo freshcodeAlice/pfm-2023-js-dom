@@ -1,117 +1,44 @@
-/*
-Promise - особливий об'єкт, який використовується для асинхронної роботи
+// Promise
 
-Має один з трьох станів:
-    - очікування (pending) - в цьому стані він "народжується"
-З нього переходить в 
-або fullfiled (успішно виконаний) - resolved
-або rejected (відхилений, помилка)
+/* Особливий об'єкт, який використовується для асинхронних обчислень
+ Дає можливість "підписуватись" на зміни в асинхронних процесах та узгоджувати асинхронні дії, дає можливість уникнути "callback hell"
+ Проміс має стан, який може бути 1 з 3:
+ - pending (очікування, обробка) 
+або
+    - fullfiled (success) - успішне завершення асинхронної дії
+або 
+    - rejected (error) - неуспішне виконання асинхронної дії. Необроблена (або другим коллбеком then, або catch) помилка у промісі вивалюється як Uncaught (in promise) error
 
-Окрім статуса, проміс несе в собі дані
+    Стан може бути тільки один в 1 момент часу. Після набуття другого статусу (fullfiled/rejected) більше ніякої зміни статусу не станеться
 
-Проміс - одноразовий, він змінює стан тільки один раз
+
+Проміс може отримати коллбеки для обробки результату за допомогою метода then
+
 */
 
-/*
-const res = fetch('https://randomuser.me/api/'); // синхронно створюється об'єкт Promise
+new Promise(function(resolve, reject) {
+    // в разі успішно виконаної роботи викликаємо resolve()
+    // проміс розуміє, що в нього статус fullfiled і коллбеку передається інформація (дані проміса)
 
-// console.log(res);
-
-res
-.then(function(data){
-    console.log('my request was good');
-    return 5;
-}, function(error) {
-    console.log('my request was bad');
-    console.log(error);
+    // в разі неуспішного виконання роботи або помилки - викликаємо reject()
+    // проміс розуміє, що у нього статус rejected і передає коллбеку інфу
 })
-.then(function(promiseData){
-    console.log(promiseData)
-}, function(){
 
+/*
+.then(function resolve(data){
+    // ось тут в data доступні дані проміса
+}, function reject(error){
+    // ось тут в error доступні дані проміса
 })
-*/
-
-/*
-setTimeout, setInterval, addEventListener - macrotasks
-
-.then(callback) - microtasks
-
-Коли в стеку задач пусто, EventLoop перевіряє дві черги.
-Першими виконуоє (одну за одною) ВСІ micro-tasks, тільки після цього - іде виконуватись одна макротаска.
-Після її виконання EventLoop знову перевіряє чергу microtasks, виконує їх (якщо вони є) всі, після цього - наступну macrotask
-
-*/
-
-const myfirstPromise = new Promise(executor);  // Error: Promise need an executor function
-
-function executor(resolve, reject){
-    const superImportantData = 'hello world';
-//    resolve(superImportantData); // --> мій проміс успішно завершився, тепер він має статус fullfiled, виконається перший коллбек then-a
-
-//    reject('Oooops'); // -> мій проміс отримав статус rejected і виконається другий коллбек then-а
-}
-
-//console.log(myfirstPromise);
-
-/*
-myfirstPromise.then(function(data) {
-    console.log('MY PROMISE OK');
-    console.log(`PROMISE DATA is: ${data}`);
-}, function(error){
-    console.log('MY PROMISE NOT OK');
-    console.log('error message', error);
-});
-*/
-
-/*
-Створити свій власний проміс, який на основі рандому в половині випадків буде успішний, в половині - відхилений
-і навісити обробку проміса, яка виводить на консоль результат роботи (або успішність, або неуспішність)
-
-*/
-
-/*
-Коли інтерпретатор коду зустрічає створення проміса, він його створює зі статусом pending і намагається виконати функцію-executor
 
 
+Або:
 
-Promise handling (then callback) - microtask. Вони виконуються (всі!) першими, тільки після того - одна макро-таска
-*/
-
-
-/*
-Методи проміса:
-
-.then() - приймає два коллбека, перший з яких - resolve, другий - reject
-Варіант:
-    .then приймає 1 коллбек, і він стає resolve-коллбеком
-    В такому випадку відхилений проміс згенерує помилку
-
-.catch() - приймає 1 коллбек, який виконається, якщо проміс було відхилено
-
-
-.finally() - приймає 1 коллбек, який виконається в кінці всього ланцюжка, незважаючи на результат роботи (тобто в обох випадках статусів проміса)
-
-*/
-
-
-const promise = fetch('https://randomuser.me/api/');
-
-/// тут проміс ще пендиться
-
-promise
-.then((response) => {
-    console.log(response); // спеціальний об'єкт Response, який містить відповідь на мій запит
-    /*
-    const promiseSecond = response.json();  // ось ця робота по перетворенню ReadableStream в дані вимагає часу!
-    return promiseSecond // повернеться 1 новий проміс, який буде містити результат асинхронного читання ReadableStream
-    */
-   return response.json();
+.then(function resolve(data){
+    // ось тут в data доступні дані проміса
 })
-.then((json)=>{
-    console.log(json);
-    /// дані з сервера тут вже доступні, можемо робити з ними все, що треба
+.catch(function reject(error){
+    // ось тут в error доступні дані проміса
 })
-.catch((error) => {
-    console.log(error);
-})
+
+*/
