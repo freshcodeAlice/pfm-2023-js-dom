@@ -1,85 +1,26 @@
-setTimeout(()=>{
-//    console.log('tick')
-}, 1000);
+const API_BASE = 'https://fakestoreapi.com'
 
+fetch(`${API_BASE}/users`)
 
-delay(3000).then(()=>{
-//    console.log('проміс відкладений у часі')
-})
-
-function delay(ms){
-    return new Promise((resolve, reject)=>{
-        setTimeout(resolve, ms)
-    })
-}
-
-const promise = delay(2000);
-promise.then(function(){
-//    console.log('tick-tack!')
-})
-
-
-/// 
-
-
-const button = document.querySelector('button');
-button.addEventListener('click', () => {
-    console.log('button click!');
-})
-
-const imagePath = 'https://d19h8kn98xvxar.cloudfront.net/images/_hero/connectwithnature.jpg';
-
-const invalidPath = 'http://82743k2jhk234mnsdfkjhs';
 
 /*
-function loadImage(src){
-    const img = document.createElement('img');
+Задача 1:
+Отримати 10 юзерів
+Динамічно створити карточки юзерів
 
-    img.setAttribute('src', src);
+Дизайн довільний, в карточці має бути відображено:
+ім'я, прізвище
+мейл
+пароль
+телефон
+адреса: місто, вулиця, номер будинку
 
-    img.addEventListener('load', function(){
-        // ось це виконується тоді, коли ВСЯ каринка вже завантажилась
-        document.body.append(img);
-    });
+Задача 2:
+За натиснення на карту юзера в шапці сторінки відображати в списку імен ім'я виділеного юзера.
+Всі імена виділених юзерів зберігати в масиві (або іншій колекції)
+Кожна карта виділеного юзера отримує "підсвітку" - червоний бордер
 
-    img.addEventListener('error', function(){
-        console.log('oops!')
-    })
-
-    return img
-
-}
-
-loadImage(imagePath)
-console.log('пішла вантажитись')
+Задача 3:
+реалізувати видалення імен з списку виділених юзерів. При цьому підсвітка з картки має пропасти.
 
 */
-
-
-function loadImage(src){
-    const img = document.createElement('img');
-
-    img.setAttribute('src', src);
-
-    return new Promise((resolve, reject) =>{
-        img.addEventListener('load', () => {
-            resolve(img)
-        });
-
-        img.addEventListener('error', () => {
-            reject(img)
-        })
-    })
-
-}
-
-
-loadImage(imagePath)
-.then((img) => {
-    document.body.append(img)
-})
-.catch((img) => {
-    const placeholder = document.createElement('div');
-    placeholder.classList.add('placeholder');
-    document.body.append(placeholder)
-})
