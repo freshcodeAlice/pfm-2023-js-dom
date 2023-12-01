@@ -1,56 +1,60 @@
-/// Async/await
+const API_KEY = 'f7c576ba3699bdd0b98ddcf196639992';
+
 
 
 /*
-prom
-.then((promiveValue) => {
-    console.log(promiveValue)
-})
-.catch((error) => {
-    console.log(error);
-})
+Таска: 
+
+1. Зареєструватись на https://home.openweathermap.org/
+
+2. Згенерувати ключ (API key) і зберегти його в коді як константу
+3. Дока: https://openweathermap.org/current
+
+4. За відправки форми зробити запит на АПІ з обраним містом.
+За результатом запиту відобразити користувачу погоду у вигляді:
+
+Місто: ....
+Погода: ...
+Температура: ...
+
 */
-    async function getSomeAsyncWork() {
 
-        const prom = new Promise(function(res, rej) {  /// при створенні проміс має статус pending 
-            const data = 'promise error'
-            rej(data);
-        })
-        console.log('отут робимо щось синхронно')
-        try {
-            const value = await prom; // дочікується, коли проміс змінить статус на fullfiled/rejected і повертає дані проміса
-
-            //!! - якщо проміс було відхилено (rejected) або в ньому сталася помилка - вона викидається неспійманою!
-            
-                    /// щось робимо з тим value, яке лежало в промісі
-                    console.log(value);
-        } catch(error) {
-            console.log(error);
-        }
-
-        console.log('MY WORK ISNT DONE')
-    }
-
-    /*
-    інтерпретатор бачить async function. Заходить і починає виконувати синхронно все до await
-    Побачивши await, весь невиконаний код відкладається як мікро-таска, поки await не дочекається, що проміс змінив статус. Await дочікується і повертає як результат роботи дані проміса.
-    Вся функція далі виконується до кінця
-
-    */
-
-    const URL = 'https://fakestoreapi.com/users';
-
-  
-    async function getLoadData(url) {
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            console.log(data);
-        } catch(error) {
-            console.log('ooops');
-        }
+// example https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}&units=metric
 
 
-    }
+const form = document.querySelector('form');
 
-getLoadData(URL);
+form.addEventListener('submit', formSubmit);
+
+
+function formSubmit(event){
+    event.preventDefault();
+    const city = event.target.city.value;
+    loadWeatherData(city)
+}
+
+
+async function loadWeatherData(city) {
+    const requestURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=uk`;
+    const response = await fetch(requestURL);
+    const weatherData = await response.json();
+    createWeatherCard(weatherData)
+}
+
+
+function createWeatherCard(weatherObj) {
+    const h3 = createElement('h3', undefined, 'Місто: ', weatherObj.name);
+    const p = createElement('p', [], 'Погода: ', weatherObj.weather[0].description);
+    const tempP = createElement('p', [], 'Температура: ', weatherObj.main.temp);
+    const article = createElement('article', [], h3, p, tempP);
+    const root = document.querySelector('#root');
+    root.replaceChildren(article)
+}
+
+
+function createElement(type, classNames=[], ...children) {
+    const elem = document.createElement(type);
+    elem.classList.add(...classNames);
+    elem.append(...children);
+    return elem;
+}
