@@ -1,111 +1,56 @@
+/// Async/await
+
+
 /*
-Задача 1:
-Отримати 10 юзерів
-Динамічно створити карточки юзерів
-
-Дизайн довільний, в карточці має бути відображено:
-ім'я, прізвище
-мейл
-пароль
-телефон
-адреса: місто, вулиця, номер будинку
-
-Задача 2:
-За натиснення на карту юзера в шапці сторінки відображати в списку імен ім'я виділеного юзера.
-Всі імена виділених юзерів зберігати в масиві (або іншій колекції)
-Кожна карта виділеного юзера отримує "підсвітку" - червоний бордер
-
-Задача 3:
-реалізувати видалення імен з списку виділених юзерів. При цьому підсвітка з картки має пропасти.
-
+prom
+.then((promiveValue) => {
+    console.log(promiveValue)
+})
+.catch((error) => {
+    console.log(error);
+})
 */
+    async function getSomeAsyncWork() {
 
+        const prom = new Promise(function(res, rej) {  /// при створенні проміс має статус pending 
+            const data = 'promise error'
+            rej(data);
+        })
+        console.log('отут робимо щось синхронно')
+        try {
+            const value = await prom; // дочікується, коли проміс змінить статус на fullfiled/rejected і повертає дані проміса
 
-const API_BASE = 'https://fakestoreapi.com';
+            //!! - якщо проміс було відхилено (rejected) або в ньому сталася помилка - вона викидається неспійманою!
+            
+                    /// щось робимо з тим value, яке лежало в промісі
+                    console.log(value);
+        } catch(error) {
+            console.log(error);
+        }
 
-const selectedUsers = new Map();
-
-fetch(`${API_BASE}/users`)  /* fetch повертає проміс, який, після відповіді з сервера зарезолвиться з даними відповіді (Response) */
-.then((response) => {
-    return response.json();  // метод then повертає проміс, але якщо зсередини коллбека повертається теж проміс, то проміс в проміс не огортається, повертається тільки той, що є результатом роботи коллбека
-})
-.then((data) =>{
-    // вже доступні 10 юзерів
-    console.log(data);
-    mapCards(data)
-})
-
-function mapCards(userArray) {
-    const cardArray = userArray.map(user => createUserCard(user));
-    const main = document.querySelector('main');
-    main.append(...cardArray)
-}
-
-
-function createUserCard(userObj) {
-  const {email, id, name: {firstname, lastname}, password, phone, address: {city, street, number}} = userObj;
-    const divImg = createElement('div', ['user-img']);
-    const nameElem = createElement('h3', ['name'], firstname, ' ', lastname);
-    const mailElem = createElement('p', ['mail'], 'email: ', email);
-    const phoneElem = createElement('p', ['phone'], 'phone: ', phone);
-    const addressElem = createElement('p', ['address'], 'address: ', city, street, number);
-        
-    const article = createElement('article', ['card'], divImg, nameElem, mailElem, phoneElem, addressElem);
-    article.dataset.id = id;
-    article.addEventListener('click', cardHandler, true);
-
-    return article;
-}
-
-function createElement(type, classNames = [], ...children){
-    const elem = document.createElement(type);
-    elem.classList.add(...classNames);
-    elem.append(...children);
-
-    return elem;
-}
-
-
-function cardHandler(event) {
-    event.stopPropagation();
-    const card = event.currentTarget;
-    card.classList.add('highlight');
-    const id = card.dataset.id; // string
-    const name = card.querySelector('.name').textContent;
-//    selectedUsers.push(name.textContent);
-    selectedUsers.set(id, name); // id is string!
-
-    updateListView(selectedUsers);
-}
-
-
-function updateListView(selectedUsers){
-    let ul = document.querySelector('header ul')
-    if (!ul) {
-        ul = createElement('ul');
-        const header = document.querySelector('header');
-        header.append(ul)
+        console.log('MY WORK ISNT DONE')
     }
-//    const list = selectedUsers.map(user => createElement('li', undefined, user));
-    const mapToArray = [...selectedUsers.entries()]
-    const list = mapToArray.map(([id, username]) => {
-        const btnDelete = createElement('button', undefined, 'X');
-        btnDelete.addEventListener('click', deleteButtonHandler);
-        const li = createElement('li', undefined, username, btnDelete);
-        li.dataset.key = id;
-        return li;
-    });
-    ul.replaceChildren(...list);
-}
 
-function deleteButtonHandler(event){
-    // треба прибрати цю людину з Map
-    // треба зняти підсвітку з картки цього юзера
-   const li = event.target.parentElement;
-    const id = li.dataset.key; // string
-    selectedUsers.delete(id);
-    updateListView(selectedUsers);
-    const article = document.querySelector(`[data-id="${id}"]`);
-    article.classList.remove('highlight');
-}
+    /*
+    інтерпретатор бачить async function. Заходить і починає виконувати синхронно все до await
+    Побачивши await, весь невиконаний код відкладається як мікро-таска, поки await не дочекається, що проміс змінив статус. Await дочікується і повертає як результат роботи дані проміса.
+    Вся функція далі виконується до кінця
 
+    */
+
+    const URL = 'https://fakestoreapi.com/users';
+
+  
+    async function getLoadData(url) {
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            console.log(data);
+        } catch(error) {
+            console.log('ooops');
+        }
+
+
+    }
+
+getLoadData(URL);
