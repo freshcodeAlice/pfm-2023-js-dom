@@ -44,7 +44,7 @@ async function loadWeatherData(city) {
 
 function createWeatherCard(weatherObj) {
     const h3 = createElement('h3', undefined, 'Місто: ', weatherObj.name);
-    const p = createElement('p', [], 'Погода: ', weatherObj.weather[0].description);
+    const p = createElement('p', ['weather'], 'Погода: ', weatherObj.weather[0].description);
     const tempP = createElement('p', [], 'Температура: ', weatherObj.main.temp);
     const article = createElement('article', [], h3, p, tempP);
     const root = document.querySelector('#root');
